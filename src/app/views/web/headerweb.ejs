@@ -1,0 +1,56 @@
+<header class="d-none d-sm-none d-md-block">
+        
+    <div class="container-fluid" id="cabecera">
+        <div class="row justify-content-end">            
+            <div class="col-2 pt-3">
+                <a href="#"><i class="fab fa-facebook-square fa-2x ml-3 animated shake"></i></a>
+                <a href="#"><i class="fab fa-instagram fa-2x ml-3 animated shake"></i></a>
+            </div>
+        </div>
+    </div>
+        
+</header>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/img/logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
+                Consultorios Sagrada Familia
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">                    
+
+                <% if(!isAuthenticated){%>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/auth/signup">Registrarse<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/auth/signin">Iniciar Sesión</a>
+                    </li>
+                    <%} if(isAuthenticated){%>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/turnos">Sacar Turno</a>
+                    </li>
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <%=user.name+" "+user.lastname%>
+                        </a>                            
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/users/panel">Perfil</a>
+                            <a class="dropdown-item" href="#">Mis turnos</a>
+                            <a class="dropdown-item" href="/auth/logout">Cerrar Sesión</a>
+                        </div>
+                    </li>
+                    <input type="hidden" id="idPaciente" value='<%=user.idPaciente%>'>
+                    <%}
+                    %>
+                    
+            </ul>
+        </div>
+    </div>
+</nav>
+
+        

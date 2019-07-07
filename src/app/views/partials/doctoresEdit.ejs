@@ -1,0 +1,156 @@
+<% include ./header %>
+
+    <title>Modificar Doctor</title>
+</head>
+
+<body>
+    <%include ./menu %>
+    <div class="contenido abrir">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container navbar-brand">Modificar Doctor
+            </div>
+        </nav>
+        <br>
+        <i id="menu-bar" class="fas fa-bars fa-2x"></i>
+        <br>
+        
+        <div class="col-offset-2 col-7">
+            <br><br>
+            <div class="card">
+                <br>
+                <div class="card-body">
+                    <form action="/doctores/edit/<%=doctores[0].idDoctor %>" method="post">
+                        
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Apellido:</label>
+                            <input type="text" name="apellido" value="<%= doctores[0].apellidoDoctor %>" class="form-control col-7" required>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Nombre:</label>
+                            <input type="text" name="nombre" value="<%= doctores[0].nombreDoctor %>" class="form-control col-7" required>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Especialidad:</label>
+                            <select class="form-control col-7" name="especialidades[]" id="especialidadesGroup" multiple="multiple" required>
+                                <% for(var i=0; i<doctores.length; i++){
+                                 %>                                      
+                                    <option selected value="<%= doctores[i].idEspecialidad %>"><%= doctores[i].nombreEspecialidad %></option>
+                                
+                               <% }%>                        
+                                
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Matrícula:</label>
+                            <input type="number" name="matricula" value="<%= doctores[0].matriculaDoctor %>" class="form-control col-7"  required>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">E-mail:</label>
+                            <input type="email" name="email" value="<%= doctores[0].emailDoctor %>" class="form-control col-7"  required>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">O. Sociales:</label>
+                            <select class="form-control col-7" name="obrassociales[]" id="obrassocialesGroup" multiple="multiple" required>
+                                <% 
+                                 for(var i=0; i<doctores.length; i++){
+                                %>    
+                                    <option selected value="<%=doctores[i].idObraS%>"><%= doctores[i].nombreObraS %></option>                               
+                                    
+                               <% }%> 
+                                
+                            </select>
+                        </div>
+
+                        <div class="form-group row">
+                            
+                            <div class="input-group mb-3">   
+                                <label class="col-3 col-form-label">Honorarios:</label>                         
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="number" class="form-control col-4" name="honorarios" value="<%= doctores[0].honorarioDoctor %>" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="submit" value="Modificar" class="btn btn-primary">
+                            <a href="/doctores" role="button" class="btn btn-secondary">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+
+    
+    <script>
+        $(document).ready(()=>{
+            $('#apellido').focus();
+            $.ajax({
+                url: '/doctores/especialidades',
+                success: (especialidades) => {
+                    $('#especialidadesGroup').select2({
+                        theme: 'bootstrap4',
+                        tags: true
+                        
+                    });
+                    let select = $('#especialidadesGroup');   
+                    let espeSelect = $('#especialidadesGroup').val();           
+                    especialidades.forEach(especialidad => {
+                        let aux = especialidad.idEspecialidad.toString();
+                        if(!(espeSelect.includes(aux))){
+                            select.append(`                                
+                                <option value="${especialidad.idEspecialidad}">${especialidad.nombreEspecialidad}</option>
+                            `)
+                        }
+                    
+                    })
+                }
+            });
+
+            $.ajax({
+                url: '/doctores/obrassociales',
+                success: (obrassociales) => {
+                    $('#obrassocialesGroup').select2({
+                        theme: 'bootstrap4',
+                        tags: true                        
+                        
+                    });
+                    
+                    let select = $('#obrassocialesGroup');
+                    let obraSocSelect = $('#obrassocialesGroup').val();
+                    obrassociales.forEach(obrasocial => {
+                        let aux = obrasocial.idObraS.toString();
+                        if(!(obraSocSelect.includes(aux))){
+                            select.append(`
+                                <option value=${obrasocial.idObraS}>${obrasocial.nombreObraS}</option>
+                            `)
+                        }
+                        
+                    })
+                },
+                
+            });
+            
+            var usedNames = {};
+            $("select > option").each(function () {
+                if (usedNames[this.value]) {
+                    $(this).remove();
+                } else {
+                    usedNames[this.value] = this.text;
+                }
+            });                      
+
+            
+        })
+    </script>   
+    <script src="/js/abrirMenu.js"></script>
+
+</body>
+</html>

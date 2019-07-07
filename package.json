@@ -1,0 +1,24 @@
+{
+    "name": "sagradafamweb",
+    "version": "1.0.0",
+    "description": "pagina web metodologia de sistemas",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "nodemon src/index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "connect-flash": "^0.1.1",
+        "cookie-parser": "^1.4.3",
+        "ejs": "^2.6.1",
+        "express": "^4.16.4",
+        "express-session": "^1.15.6",
+        "mysql": "^2.16.0",
+        "passport": "^0.4.0",
+        "passport-local": "^1.0.0",
+        "serve-favicon": "^2.5.0"
+    }
+}
