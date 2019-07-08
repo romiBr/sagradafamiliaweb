@@ -230,53 +230,73 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                                 </div>
-                                <%}
-                                                %>
-
-                                    <div class="card animated flipInY">
-                                        <div class="headeing pb-30">
-                                            <h2>Registrarme</h2>
-                                            <span class="b-line l-left line-h"></span>
-                                        </div>
-                                        <div class="card-body">
-                                            <form action="/auth/signup" method="post" autocomplete="off">
-
-                                                <div class="form-group">
-                                                    <label for="dni">DNI:</label>
-                                                    <input type="number" name="dni" id="dni" placeholder="DNI" min=1 max=99999999 class="form-control" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="email">Email:</label>
-                                                    <input type="email" name="email" id="email" placeholder="Email" class="form-control" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="password">Contraseña:</label>
-                                                    <input type="password" name="password" id="password" placeholder="Contraseña" class="form-control" required>
-                                                </div>
-                                                <button type="sumit" class="btn-text">Registrarme</button>
-                                            </form>
-                                        </div>
-
-                                    </div>
-
                         </div>
                     </div>
-
-
-                    <%}%>
-
         </div>
+        <%}%>
+
+            <!-- Login Section -->
+            <div id="login" class="padding ptb-xs-40 page-signin">
+                <div class="container">
+                    <div class="row">
+                        <div class="main-body">
+                            <div class="body-inner">
+                                <div class="card bg-white">
+                                    <div class="card-content">
+                                        <section class="logo text-center">
+                                            <h2>Registrarse</h2>
+                                        </section>
+                                        <form action="/auth/signup" method="post" autocomplete="off" class="form-horizontal ng-pristine ng-valid">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <div class="ui-input-group">
+                                                        <input type="number" id="dni" name="dni" min=1 max=99999999 required class="form-control">
+                                                        <span class="input-bar"></span>
+                                                        <label>Documento</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="ui-input-group">
+                                                        <input type="email" name="email" id="email" required class="form-control">
+                                                        <span class="input-bar"></span>
+                                                        <label>Email</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="ui-input-group">
+                                                        <input type="password" id="password" name="password" required class="form-control">
+                                                        <span class="input-bar"></span>
+                                                        <label>Contraseña</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="spacer"></div>
+                                                <div class="form-group checkbox-field">
+                                                    <label class="text-small">
+                                                                    <i>Al registrarme acepto términos y condiciones de políticas de privacidad.</label>
+                                                    </i>
+                                                </div>
+                                            </fieldset>
+                                            <div class="card-action no-border text-right">
+                                                <button class="btn-text">Registrarme</button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Login Section -->
+
+
+            <%}%>
+
 
 
     </section>
-
-    <section class="map-box">
-        <div class="map">
-            <div id="map"></div>
-        </div>
-    </section>
-
-
 
     <!-- Footer -->
     <footer>

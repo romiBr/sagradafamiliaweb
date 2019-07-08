@@ -1,6 +1,7 @@
 const dbConnection = require('../../config/dbConnection');
 const authMiddleware = require('../../config/middleware/auth');
 
+
 module.exports = app => {
     const myConnection = dbConnection();
 
@@ -18,6 +19,32 @@ module.exports = app => {
             });
 
         });
+
+    });
+
+    app.get('/misturnos', authMiddleware.isLogged, (req, res) => {
+        let consulta = 'SELECT t.idTurno, DATE_FORMAT(t.start,("%d-%m-%Y")) as fecha, TIME_FORMAT(t.start,("%H:%m")) as hora, t.idDoctor, t.valorConsulta, t.atendido, d.apellidoDoctor, d.nombreDoctor, m.nombreModalidad FROM turnos t inner JOIN doctores d inner join modalidad_pago m ON t.idDoctor = d.idDoctor and t.idModalidad = m.idModalidad WHERE t.idPaciente = ' + req.user.idPaciente + ' ORDER BY fecha ASC';
+
+        myConnection.query(consulta, (err, rows) => {
+            if (err) {
+                console.log(err);
+            }
+            res.render('web/listarturnos', {
+                isAuthenticated: req.isAuthenticated(),
+                user: req.user,
+                turnos: rows
+            });
+        });
+
+    });
+
+    app.get('/hclinicas', authMiddleware.isLogged, (req, res) => {
+
+        res.render('web/hclinica', {
+            isAuthenticated: req.isAuthenticated(),
+            user: req.user
+        });
+
 
     });
 

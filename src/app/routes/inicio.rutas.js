@@ -34,6 +34,8 @@ module.exports = app => {
         });
     });
 
+
+
     /*app.get('/prueba/:id', (req, res) => {
         //http://localhost:3000/1?name=romina&doctor=4
         console.log(req.params);

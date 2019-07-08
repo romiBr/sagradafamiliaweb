@@ -22,4 +22,6 @@ module.exports = app => {
 
     app.get('/users/panel', authMiddleware.isLogged, controllers.userController.getUserPanel);
 
+
+
 }
