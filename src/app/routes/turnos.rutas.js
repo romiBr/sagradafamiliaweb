@@ -39,11 +39,18 @@ module.exports = app => {
     });
 
     app.get('/hclinicas', authMiddleware.isLogged, (req, res) => {
+        let consulta = 'SELECT h.idHistoria, h.contenido, h.idPaciente, h.idDoctor FROM historias h WHERE h.idPaciente = ' + req.user.idPaciente;
+        myConnection.query(consulta, (err, rows) => {
+            if (err) {
+                console.log(err);
+            }
+            res.render('web/hclinica', {
+                isAuthenticated: req.isAuthenticated(),
+                user: req.user,
+                historias: rows
+            });
+        })
 
-        res.render('web/hclinica', {
-            isAuthenticated: req.isAuthenticated(),
-            user: req.user
-        });
 
 
     });
