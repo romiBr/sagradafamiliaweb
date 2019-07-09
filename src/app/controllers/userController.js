@@ -27,7 +27,8 @@ module.exports = {
                     userPassword: req.body.password,
                     name: paciente[0].nombrePaciente,
                     lastname: paciente[0].apellidoPaciente,
-                    idPaciente: paciente[0].id
+                    idPaciente: paciente[0].id,
+                    tipoUsuario: 'p'
                 };
                 consulta = 'INSERT INTO user_web SET ?';
                 myConnection.query(consulta, user, (err, resul, next) => {
